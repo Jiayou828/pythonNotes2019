@@ -1,0 +1,36 @@
+1.Models
+	1.商品类型 - GoodsType
+		1.title - 类型名称
+		2.picture - 类型图片
+		3.desc - 类型描述
+	2.商品 - Goods
+		1.title - 商品名称
+		2.price - 商品价格
+		3.spec - 商品规格
+		4.picture - 商品图片
+		5.goodsType - 商品类型
+		6.isActive - 是否上架，默认为True
+
+
+2.加载首页数据
+	1.后台查询数据 - 返回 JSON 字符串
+		[
+			{
+				"type":"{'title':'礼品卡券','picture':'static/xx'}",
+				"goods":"[
+					{'title':'xxx','price':'xxx'},
+					{'title':'xxx'}
+				]"
+			},
+			{
+				"type":"{}",
+				"goods":"[]"
+			},
+			{
+				"type":"{}",
+				"goods":"[]"
+			}
+		]
+
+
+

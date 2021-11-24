@@ -1,0 +1,268 @@
+2. 正则表达式对象 RegExp
+				RegExp : Regualr Expression
+				1. 语法 ：
+					var reg1 = /微软/ig;
+					var reg2 = new RegExp('匹配模式','修饰符');
+				2. 属性 ：
+						lastIndex : 可读可写，表示下一次匹配的起始索引
+						注意 ：
+							1. 默认情况下，正则表达式对象不能重复调用方法，
+							如果重复调用，结果会出错：
+								由于lastIndex保存再一次匹配的起始下标，
+								重复调用时，不能保证每次都从下标0开始
+								验证，可以手动调整lastIndex为0.
+
+							2. 只有正则对象设置全局匹配 g ，该属性
+							才起作用
+				3. 方法 ：
+						test(str) :验证字符串中是否存在满足正则匹配模式
+						的内容，存在则返回true,不存在返回false
+						参数为要验证的字符串
+		3. Math 对象
+			1. Math对象主要提供一些列数学运算的方法
+			2. 属性 ：
+				1. 圆周率 : Math.PI
+				2. 自然对数 : Math.E
+			3. 方法 ：
+				1. 三角函数 
+						Math.sin(x)
+						Math.cos(x)
+						Math.tan(x)
+						注意 ：参数为角度
+						角度换算 ：
+							Math.PI / 180 ：
+								Math.PI也可以表示180度
+								Math.PI / 180 表示 1度
+				2. 计算函数
+						Math.sqrt(x);  表示对x开平方
+						Math.log(x);	 求对数
+						Math.pow(x,y); 求x的y次方
+				3. 数值操作
+						Math.abs(x);	 求x的绝对值
+						Math.max(x1,...xn); 求一组数据的最大值
+						Math.min(x1,...xn); 求一组数据的最小值
+						最常用的操作 ：
+						Math.random(); 生成0-1之间的随机数
+						Math.ceil(x);	对x向上取整,忽略小数位,整数位+1
+						Math.floor(x);对x向下取整,舍弃小数位,保留整数位
+						Math.round(x);对x四舍五入取整数
+		4. Date 对象
+			1. 提供操作日期和事件的方法
+			2. 创建Date对象
+				1. var date1 = new Date(); //获取当前的日期时间
+				2. 创建指定日期的对象
+					 var date2 = new Date("2011/11/11");
+					 var date3 = new Date("2011/11/11 11:11:11");
+			3. 方法：
+				1. 读取或设置当前时间的毫秒数
+						1. getTime()
+								会返回当前日期时间距1970-01-01 00:00:00
+								之间间隔的毫秒数
+						2. setTime(s)
+								根据指定的毫秒数s,计算日期
+				2. 获取时间分量
+						1. getFullYear()
+							 获取当前日期对象中四位的年份信息
+						2. getMonth()
+							 获取当前日期对象中的月份信息
+							 返回值范围 0-11 对应12个月，在使用时
+							 需要手动调整
+						3. getDate()
+							 获取当前日期对象中的天数（某日）
+						4. getDay()
+							 获取当前日期对象中的星期数
+							 返回值范围 0-6 对应星期天 - 星期六，
+							 星期天需要特殊处理
+						5. getHours()
+							 获取当前日期对象中的小时数
+						6. getMinutes()
+							 获取分钟数
+						7. getSeconds()
+							 获取秒数
+						8. getMilliseconds()
+							 获取毫秒数
+				3. 设置日期的显示方式
+					1. toString();
+					2. toLocaleString();
+							根据本地时间将date对象转换为字符串，返回
+							以本地规则格式化后的日期
+					3. toLocaleTimeString();
+					4. toLocaleDateString();
+			  练习 ：
+					1. 获取当前系统时间
+					2. 将系统时间以以下格式输出 ：
+							xxxx年xx月xx日 xx时xx分xx秒 星期x
+	4. BOM 
+		1. BOM 与 DOM
+			BOM ：Browser Object Model 浏览器对象模型，
+						提供操作浏览器的相关方法
+						核心对象 window ,浏览器窗口对象,是JS
+						的顶层对象
+			DOM ：Document Object Model 文档对象模型，
+						提供操作文档的相关方法
+						核心对象 document ，操作文档
+			注意 ：
+				window -> document //window顶层对象包含document
+				document.write();
+				window.document.write();
+	2. window对象
+		1. 作用 ：浏览器窗口对象
+				全局变量和全局函数，都是window对象的属性和方法
+				window在使用时可以省略
+				et :
+					var a = 10;
+					window.b = 10;
+					console.log(a,window.b);
+					function sum(a,b){
+					}
+					window.sum = function (){};
+					sum();
+					window.sum();
+		2. 对话框
+			1. alert("");
+					警告框 window.alert();
+			2. prompt("");
+					输入框 window.prompt();
+			3. confirm("是否确定");
+					确认框 返回布尔值，只有当用户点击“确定”时，
+					才返回true，其他都返回False
+		3. 定时器方法
+				作用 ：按照指定的周期或者时间间隔，来调用函数或者
+							计算表达式
+				1. 周期性定时器 / 间歇调用
+						1. 特点 ：每隔一段时间就执行一遍代码
+						2. 语法 ：
+								var timer = setInterval(fun,duration);
+								window.setInterval();
+								参数 ：
+									fun : 表示要执行的操作，可以是函数，
+									也可以直接使用匿名函数
+									duration ：时间间隔，
+															隔多少时间执行一次代码
+															单位是 ms （毫秒）
+								返回值 ：
+									timer : 表示当前定时器的ID ，
+												  就是一个整数，
+													可以区分不同的定时器，
+													清除定时器时使用
+						3. 清除定时器
+								clearInterval(timer);
+								参数 ：定时器的ID
+						练习 :
+							1. 创建按钮 开始和结束
+							2. 点击开始时，开启定时器，每隔一秒在
+									控制台输出当前的系统时间
+							3. 点击结束时，停止打印.
+				2. 一次性定时器 / 超时调用
+						1. 特点 ：在指定的时间间隔之后，执行一次操作
+						2. 语法 ：
+								var timer = setTimeout(fun,delay);
+								参数 ：
+									fun : 要执行的操作
+									delay : 时间间隔，隔多久再执行相应操作
+								返回值 :
+									timer ：定时器ID，在清除定时器时使用
+						3. 清除定时器 ：
+								clearTimeout(timer);
+						练习 ：
+							1. 网页中创建一个按钮
+							2. 点击按钮时，弹出确认框，
+									询问用户是否需要关闭网页
+									如果点击确定，就在5秒之后关闭网页
+									window.close();
+		4. window中的属性
+				window中的属性，本身又是一个对象
+				1. screen对象
+						访问屏幕对象 ：console.log(screen);
+													  console.log(window.screen);
+						作用 ：获取客户端显示器相关的信息
+						属性 ：
+							1. width /height 获取屏幕的宽高
+							2. availWidth /availHeight 
+								获取屏幕实际可用的宽高（减去任务栏之后的值）
+				2. history 对象
+						作用 ： 包含当前窗口访问过的所有URL
+						属性&方法 ：
+							1. length 属性 ：获取当前窗口访问过的url
+							的数量
+							2. 方法 ：
+								1. back() 后退
+								2. forward() 前进
+								3. go(num) 跳转几步
+										num 取值为整数，可正可负
+										在当前网页的基础上前进/后退几步
+				3. location 对象
+					作用 ：location 保存的是浏览器地址栏的信息
+					属性 ：
+							href : 获取当前窗口正在浏览的网页url
+							如果给href属性赋值，就相当于页面跳转
+					方法 ：
+							reload() 重载，相当于刷新
+							reload(true) : 忽略缓存，从服务器端加载
+							reload(false) : 从缓存中加载（默认）
+					练习 ：
+						创建按钮，点击时跳转 http://www.tmooc.cn
+				4. navigator 对象
+						作用 ：保存浏览器相关的信息
+						属性 ：
+								userAgent ：显示信息
+3. DOM (ducument对象)
+		1. 介绍 ：
+			document对象，是DOM中的顶层对象，封装了所有的HTML元素
+			相关的属性，方法以及事件
+		2. 节点（对象）
+			网页在加载过程中，会自动生成一颗节点树（DOM树），
+			DOM树会封装网页上所有的内容。网页中的每一个元素，
+			每一段文本，甚至注释，都会被封装成DOM树中单独的
+			一个节点
+			1. 节点分类 
+				1. 元素节点 - 网页中的一个元素（标签）
+				2. 属性节点 - 标签中的一个标签属性
+				3. 文本节点 - 表示标签中的文本内容
+				-------------------------------
+				4. 注释节点 - 网页中的注释
+				5. 文档节点 - 表示整个文档
+			2. 节点操作
+				1. 获取节点
+				2. 读取节点
+				3. 修改节点
+				4. 删除节点
+				5. 创建节点
+		3. 获取元素节点
+				1. document.getElementsByTagName('a');
+						通过制定的标签名获取元素节点，返回
+						节点列表（数组），可以根据下标获取具体的
+						元素节点对象
+				2. document.getElementsByClassName('');
+						根据元素class属性值查找，返回节点列表
+				3. document.getElementsByName('');
+						根据元素name属性值查找，返回节点列表
+						一般用于查找表单元素
+				4. document.getElementById('');
+						根据元素id属性值查找，返回具体的元素节点对象
+				注意 ：
+					脚本标签的书写位置，要放在body之后
+				DOM 属性：
+					1. innerHTML : 
+							修改/获取元素节点中的HTML文本，可识别标签
+					2. innerText :
+							修改/获取元素节点中的普通文本，不能识别标签
+					3. value :
+							该属性只针对表单控件，允许获取或修改表单
+							控件的值
+					作业 ：
+						1. 创建网页，添加div,文本框，按钮
+						2. 点击按钮时，实现将文本框输入的内容以
+						一级标题的形式显示在div中
+								
+
+
+
+
+					
+
+
+
+
+
+	

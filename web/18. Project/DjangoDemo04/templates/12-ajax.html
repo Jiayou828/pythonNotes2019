@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  {% csrf_token %}
+  <button onclick="ajaxBtn()">发送AJAX请求</button>
+  <button onclick="jqAjaxBtn()">JQUERY-AJAX</button>
+  <button onclick="ajaxJSON()">AJAX-JSON</button>
+  <div id="show"></div>
+  <script>
+    function createXhr(){
+      if(window.XMLHttpRequest)
+        return new XMLHttpRequest()
+      return new ActiveXObject("Microsoft.XMLHTTP")
+    }
+
+    function ajaxBtn(){
+      //1.创建xhr
+      var xhr = createXhr();
+      //2.创建请求
+      xhr.open('get','/12-server',true);
+      //3.设置回调函数
+      xhr.onreadystatechange = function(){
+        if(xhr.readyState==4&&xhr.status==200){
+          document.getElementById('show').innerHTML = xhr.responseText;
+        }
+      }
+      //4.发送请求
+      xhr.send(null);
+    }
+  </script>
+
+  <!-- jq - ajax -->
+  <script src="/static/js/jquery-1.11.3.js"></script>
+  <script>
+    function jqAjaxBtn(){
+      var params = {
+        'csrfmiddlewaretoken':$("[name='csrfmiddlewaretoken']").val()
+      }
+
+      $.post('/12-server/',params,function(data){
+        //data表示的是响应回来的数据
+        $("#show").html(data);
+      });
+    }
+
+    function ajaxJSON(){
+      $.get('/13-server',function(data){
+        //var html = "";
+        /*html += "<h3>姓名:"+data.name+"</h3>";
+        html += "<h3>年龄:"+data.age+"</h3>";
+        html += "<h3>性别:"+data.gender+"</h3>";*/
+        //$("#show").html(html);
+
+       // jsonStr = serializers.serialize('json',users)
+
+        $.each(data,function(i,obj){
+          console.log("id:"+obj.pk);
+          console.log("uphone:"+obj.fields.uphone);
+          console.log("uname:"+obj.fields.uname);
+        });
+      },'json');
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
